@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Task from './Task';
-import { TaskInterface } from '../../types/taskInterface';
+import { TaskInterface } from '../../types/task-interface';
 
 it('It should mount', () => {
     const div = document.createElement('div');

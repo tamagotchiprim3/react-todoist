@@ -1,12 +1,11 @@
 import React from 'react';
-import TasksList from './TasksList';
+import TasksSearch from './TasksSearch';
 import { createRoot } from 'react-dom/client';
-import { TaskInterface } from '../../types/task-interface';
 
 
 it('It should mount', () => {
     const div = document.createElement('div');
     const root = createRoot(div); // Создаём root
-    root.render(<TasksList tasks={{} as TaskInterface[]} />); // Рендерим компонент
+    root.render(<TasksSearch />); // Рендерим компонент
     root.unmount(); // Правильный способ размонтирования в React 18
 });
