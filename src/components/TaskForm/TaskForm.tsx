@@ -91,11 +91,6 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     label="Description"
                     value={formData.description}
                     onChange={handleChange}
-                    fullWidth
-                    margin="dense"
-                    variant="standard"
-                    multiline
-                    rows={3}
                 />
                 <FormControl>
                     <InputLabel id="priority-label">Priority</InputLabel>
