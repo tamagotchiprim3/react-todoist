@@ -3,8 +3,13 @@ export interface TaskInterface {
     title: string;
     description: string;
     creationDate: Date;
-    exparationDate: Date;
+    expirationDate: Date;
     priority: TaskPriority;
 }
 
-export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
+export enum TaskPriority {
+    Low = 'low',
+    Medium = 'medium',
+    High = 'high',
+    Urgent = 'urgent'
+}

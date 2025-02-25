@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { TaskInterface } from '../../types/task-interface';
-import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
+import './Task.scss';
 
 interface TaskProps {
     task: TaskInterface;
@@ -9,10 +10,10 @@ interface TaskProps {
 const Task: FC<TaskProps> = ({ task }) => {
 
 
-    return <Card>
+    return <Card className="card" sx={{ 'background': '#4dabf5' }}>
         <CardContent>
             <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                <>{task.creationDate.toLocaleDateString()} - {task.exparationDate.toLocaleDateString()}</>
+                <>{task.creationDate.toLocaleDateString()} - {task.expirationDate.toLocaleDateString()}</>
             </Typography>
             <Typography variant="h5" component="div">
                 {task.title}
@@ -22,9 +23,6 @@ const Task: FC<TaskProps> = ({ task }) => {
                 {task.description}
             </Typography>
         </CardContent>
-        <CardActions>
-            <Button size="small">Action</Button>
-        </CardActions>
     </Card>;
 };
 

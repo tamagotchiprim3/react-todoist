@@ -1,0 +1,19 @@
+.tasks-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+}
+
+.creation-card {
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  height: 10rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
