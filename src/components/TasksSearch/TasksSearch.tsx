@@ -4,14 +4,18 @@ import './TasksSearch.scss';
 import { SortTypes } from '../../types/sort';
 
 interface TasksSearchProps {
-    search: string,
-    onSearchChange: (search: string) => void,
-    sort: SortTypes,
-    onSortChange: (sort: SortTypes) => void,
+    search: string;
+    onSearchChange: (search: string) => void;
+    sort: SortTypes;
+    onSortChange: (sort: SortTypes) => void;
 }
 
-const TasksSearch: FC<TasksSearchProps> = ({ sort, onSortChange, search, onSearchChange }) => {
-
+const TasksSearch: FC<TasksSearchProps> = ({
+    sort,
+    onSortChange,
+    search,
+    onSearchChange,
+}) => {
     const handleSortChange = (event: SelectChangeEvent<SortTypes>) => {
         onSortChange(event.target.value as SortTypes);
     };
@@ -23,7 +27,12 @@ const TasksSearch: FC<TasksSearchProps> = ({ sort, onSortChange, search, onSearc
 
     return (
         <div className="search">
-            <Input value={search} onChange={handleSearchChange} className="search__input" placeholder="Search task" />
+            <Input
+                value={search}
+                onChange={handleSearchChange}
+                className="search__input"
+                placeholder="Search task"
+            />
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -31,10 +40,18 @@ const TasksSearch: FC<TasksSearchProps> = ({ sort, onSortChange, search, onSearc
                 label="Sort"
                 onChange={handleSortChange}
             >
-                <MenuItem value={SortTypes.CreationDateASC}>Creation date</MenuItem>
-                <MenuItem value={SortTypes.expDateASC}>Expiration date</MenuItem>
-                <MenuItem value={SortTypes.PriorityASC}>Priority (ASC)</MenuItem>
-                <MenuItem value={SortTypes.PriorityDESC}>Priority (DESC)</MenuItem>
+                <MenuItem value={SortTypes.CreationDateASC}>
+                    Creation date
+                </MenuItem>
+                <MenuItem value={SortTypes.ExpDateASC}>
+                    Expiration date
+                </MenuItem>
+                <MenuItem value={SortTypes.PriorityASC}>
+                    Priority (ASC)
+                </MenuItem>
+                <MenuItem value={SortTypes.PriorityDESC}>
+                    Priority (DESC)
+                </MenuItem>
             </Select>
         </div>
     );

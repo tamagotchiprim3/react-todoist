@@ -11,5 +11,12 @@ export enum TaskPriority {
     Low = 'low',
     Medium = 'medium',
     High = 'high',
-    Urgent = 'urgent'
+    Urgent = 'urgent',
+}
+
+export interface ITaskForm {
+    title: string;
+    description: string;
+    priority: TaskPriority;
+    expirationDate: Date;
 }

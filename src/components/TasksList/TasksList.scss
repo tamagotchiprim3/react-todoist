@@ -3,6 +3,10 @@
   gap: 1.5rem;
   flex-wrap: wrap;
   padding: 1.5rem;
+  flex: 1 1 auto;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .creation-card {
@@ -10,8 +14,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15rem;
-  height: 10rem;
+  width: 20rem;
+  height: 15rem;
 
   &:hover {
     cursor: pointer;

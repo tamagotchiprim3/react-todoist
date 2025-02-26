@@ -1,16 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import TasksList from '../TasksList/TasksList';
 import TasksSearch from '../TasksSearch/TasksSearch';
 import { SortTypes } from '../../types/sort';
 import { TaskInterface, TaskPriority } from '../../types/task-interface';
+import { filterTasks } from '../../utils/filter';
+import { sortTasks } from '../../utils/sort';
+import TaskFooter from '../TaskFooter/TaskFooter';
+import './Tasks.scss';
 
-interface TasksProps {
-}
+interface TasksProps {}
 
 const Tasks: FC<TasksProps> = () => {
-
-    //todo реализовать сортировку и фильтрацию для задач 
-    const [sort, setSort] = React.useState<SortTypes>(SortTypes.CreationDateASC);
+    const [sort, setSort] = React.useState<SortTypes>(
+        SortTypes.CreationDateASC,
+    );
     const [search, setSearch] = React.useState<string>('');
     const [tasks, setTasks] = React.useState<TaskInterface[]>([
         {
@@ -51,11 +54,27 @@ const Tasks: FC<TasksProps> = () => {
         setTasks(tasks);
     };
 
-    return (<>
-            <TasksSearch search={search} sort={sort} onSearchChange={handleSearchChange}
-                         onSortChange={handleSortChange} />
-            <TasksList tasks={tasks} onTasksChange={handleTaskChange} />
-        </>
+    const filteredAndSortedTasks: TaskInterface[] = useMemo(() => {
+        let result = [...tasks]; // Начинаем с исходного массива
+        result = filterTasks(result, search); // Применяем фильтр поиска
+        result = sortTasks(result, sort); // Применяем сортировку
+        return result;
+    }, [tasks, search, sort]);
+
+    return (
+        <div className="tasks">
+            <TasksSearch
+                search={search}
+                sort={sort}
+                onSearchChange={handleSearchChange}
+                onSortChange={handleSortChange}
+            />
+            <TasksList
+                tasks={[...filteredAndSortedTasks]}
+                onTasksChange={handleTaskChange}
+            />
+            <TaskFooter tasks={tasks} />
+        </div>
     );
 };
 

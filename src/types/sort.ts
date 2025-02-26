@@ -1,6 +1,6 @@
 export enum SortTypes {
     PriorityASC = 'priorityASC',
     PriorityDESC = 'priorityDESC',
-    CreationDateASC = 'creationDateASC',
-    expDateASC = 'expDateASC',
+    CreationDateASC = 'CreationDateASC',
+    ExpDateASC = 'ExpDateASC',
 }

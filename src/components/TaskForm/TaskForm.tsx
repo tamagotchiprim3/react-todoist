@@ -12,9 +12,12 @@ import {
     SelectChangeEvent,
     TextField,
 } from '@mui/material';
-import { TaskInterface, TaskPriority } from '../../types/task-interface';
+import {
+    ITaskForm,
+    TaskInterface,
+    TaskPriority,
+} from '../../types/task-interface';
 
-// Пропсы компонента
 interface TaskFormProps {
     open: boolean;
     onClose: () => void;
@@ -22,14 +25,18 @@ interface TaskFormProps {
 }
 
 const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<ITaskForm>({
         title: '',
         description: '',
         priority: TaskPriority.Low,
         expirationDate: new Date(),
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+    const handleChange = (
+        e: React.ChangeEvent<
+            HTMLInputElement | { name?: string; value: unknown }
+        >,
+    ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
             ...prev,
@@ -83,6 +90,12 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     fullWidth
                     margin="dense"
                     variant="standard"
+                    error={!formData.title || formData.title.trim().length < 3}
+                    helperText={
+                        !formData.title || formData.title.trim().length < 3
+                            ? 'Title must be at least 3 characters long'
+                            : ''
+                    }
                 />
                 <TextField
                     required
@@ -91,6 +104,16 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     label="Description"
                     value={formData.description}
                     onChange={handleChange}
+                    error={
+                        !formData.description ||
+                        formData.description.trim().length < 10
+                    }
+                    helperText={
+                        !formData.description ||
+                        formData.description.trim().length < 10
+                            ? 'Description must be at least 10 characters long'
+                            : ''
+                    }
                 />
                 <FormControl>
                     <InputLabel id="priority-label">Priority</InputLabel>
@@ -102,10 +125,18 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                         onChange={handleSelectChange}
                         label="Priority"
                     >
-                        <MenuItem value={TaskPriority.Low}>{TaskPriority.Low}</MenuItem>
-                        <MenuItem value={TaskPriority.Medium}>{TaskPriority.Medium}</MenuItem>
-                        <MenuItem value={TaskPriority.High}>{TaskPriority.High}</MenuItem>
-                        <MenuItem value={TaskPriority.Urgent}>{TaskPriority.Urgent}</MenuItem>
+                        <MenuItem value={TaskPriority.Low}>
+                            {TaskPriority.Low}
+                        </MenuItem>
+                        <MenuItem value={TaskPriority.Medium}>
+                            {TaskPriority.Medium}
+                        </MenuItem>
+                        <MenuItem value={TaskPriority.High}>
+                            {TaskPriority.High}
+                        </MenuItem>
+                        <MenuItem value={TaskPriority.Urgent}>
+                            {TaskPriority.Urgent}
+                        </MenuItem>
                     </Select>
                 </FormControl>
                 <TextField
@@ -119,9 +150,18 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     fullWidth
                     margin="dense"
                     variant="standard"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                    error={
+                        !formData.expirationDate ||
+                        formData.expirationDate.getTime() <=
+                            new Date().getTime()
+                    }
+                    helperText={
+                        !formData.expirationDate ||
+                        formData.expirationDate.getTime() <=
+                            new Date().getTime()
+                            ? 'Expiration date must be in the future'
+                            : ''
+                    }
                 />
             </DialogContent>
             <DialogActions>
