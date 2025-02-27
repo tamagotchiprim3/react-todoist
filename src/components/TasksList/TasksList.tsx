@@ -1,18 +1,20 @@
-import React, { FC, useState } from 'react';
+import React, { ActionDispatch, FC, useContext, useState } from 'react';
 import { TaskInterface } from '../../types/task-interface';
 import Task from '../Task/Task';
 import './TasksList.scss';
 import { Card } from '@mui/material';
 import TaskForm from '../TaskForm/TaskForm';
-import { TaskAction } from '../../reducers/task-reducer';
+import {
+    TaskAction,
+    TasksContext,
+    TasksDispatchContext,
+} from '../../contexts/task-context';
 
-interface TasksListProps {
-    tasks: TaskInterface[];
-    dispatch: (action: TaskAction) => void;
-}
-
-const TasksList: FC<TasksListProps> = ({ tasks, dispatch }) => {
+const TasksList: FC = () => {
     const [openCreationForm, setOpenCreationForm] = useState<boolean>(false);
+    const tasks: TaskInterface[] = useContext(TasksContext) || [];
+    const dispatchTasks: ActionDispatch<[action: TaskAction]> =
+        useContext(TasksDispatchContext)!;
 
     const handleCreationFormToggle = () => {
         setOpenCreationForm(!openCreationForm);
@@ -26,14 +28,14 @@ const TasksList: FC<TasksListProps> = ({ tasks, dispatch }) => {
             id: crypto.randomUUID(), // Генерируем уникальный ID
             creationDate: new Date(), // Текущая дата
         };
-        dispatch({
+        dispatchTasks({
             type: 'create',
             message: newTask,
         });
     };
 
     function handleTaskDelete(task: TaskInterface) {
-        dispatch({
+        dispatchTasks({
             type: 'delete',
             message: task,
         });

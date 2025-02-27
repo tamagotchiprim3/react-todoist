@@ -1,12 +1,10 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import './TaskFooter.scss';
 import { TaskInterface } from '../../types/task-interface';
+import { TasksContext } from '../../contexts/task-context';
 
-interface TaskFormProps {
-    tasks: TaskInterface[];
-}
-
-const TaskFooter: FC<TaskFormProps> = ({ tasks }) => {
+const TaskFooter: FC = () => {
+    const tasks: TaskInterface[] = useContext(TasksContext) || [];
     const expiredTasksCount = tasks.filter(
         (task) => task.expirationDate.getTime() < new Date().getTime(),
     ).length;
