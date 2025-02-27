@@ -150,18 +150,6 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     fullWidth
                     margin="dense"
                     variant="standard"
-                    error={
-                        !formData.expirationDate ||
-                        formData.expirationDate.getTime() <=
-                            new Date().getTime()
-                    }
-                    helperText={
-                        !formData.expirationDate ||
-                        formData.expirationDate.getTime() <=
-                            new Date().getTime()
-                            ? 'Expiration date must be in the future'
-                            : ''
-                    }
                 />
             </DialogContent>
             <DialogActions>

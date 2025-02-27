@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useReducer } from 'react';
 import TasksList from '../TasksList/TasksList';
 import TasksSearch from '../TasksSearch/TasksSearch';
 import { SortTypes } from '../../types/sort';
@@ -7,6 +7,7 @@ import { filterTasks } from '../../utils/filter';
 import { sortTasks } from '../../utils/sort';
 import TaskFooter from '../TaskFooter/TaskFooter';
 import './Tasks.scss';
+import { TaskAction, tasksReducer } from '../../reducers/task-reducer';
 
 interface TasksProps {}
 
@@ -15,7 +16,8 @@ const Tasks: FC<TasksProps> = () => {
         SortTypes.CreationDateASC,
     );
     const [search, setSearch] = React.useState<string>('');
-    const [tasks, setTasks] = React.useState<TaskInterface[]>([
+
+    const [tasks, dispatch] = useReducer(tasksReducer, [
         {
             id: '1',
             title: 'Fix login bug',
@@ -50,8 +52,9 @@ const Tasks: FC<TasksProps> = () => {
         setSearch(search);
     };
 
-    const handleTaskChange = (tasks: TaskInterface[]) => {
-        setTasks(tasks);
+    const handleTasksChange = (action: TaskAction) => {
+        dispatch(action);
+        console.log(action);
     };
 
     const filteredAndSortedTasks: TaskInterface[] = useMemo(() => {
@@ -71,7 +74,7 @@ const Tasks: FC<TasksProps> = () => {
             />
             <TasksList
                 tasks={[...filteredAndSortedTasks]}
-                onTasksChange={handleTaskChange}
+                dispatch={handleTasksChange}
             />
             <TaskFooter tasks={tasks} />
         </div>

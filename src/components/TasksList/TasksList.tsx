@@ -4,13 +4,14 @@ import Task from '../Task/Task';
 import './TasksList.scss';
 import { Card } from '@mui/material';
 import TaskForm from '../TaskForm/TaskForm';
+import { TaskAction } from '../../reducers/task-reducer';
 
 interface TasksListProps {
     tasks: TaskInterface[];
-    onTasksChange: (task: TaskInterface[]) => void;
+    dispatch: (action: TaskAction) => void;
 }
 
-const TasksList: FC<TasksListProps> = ({ tasks, onTasksChange }) => {
+const TasksList: FC<TasksListProps> = ({ tasks, dispatch }) => {
     const [openCreationForm, setOpenCreationForm] = useState<boolean>(false);
 
     const handleCreationFormToggle = () => {
@@ -25,11 +26,17 @@ const TasksList: FC<TasksListProps> = ({ tasks, onTasksChange }) => {
             id: crypto.randomUUID(), // Генерируем уникальный ID
             creationDate: new Date(), // Текущая дата
         };
-        onTasksChange([...tasks, newTask]);
+        dispatch({
+            type: 'create',
+            message: newTask,
+        });
     };
 
-    function handleTaskDelete(taskId: string) {
-        onTasksChange(tasks.filter((task) => task.id !== taskId));
+    function handleTaskDelete(task: TaskInterface) {
+        dispatch({
+            type: 'delete',
+            message: task,
+        });
     }
 
     return (

@@ -11,7 +11,7 @@ import './Task.scss';
 
 interface TaskProps {
     task: TaskInterface;
-    onDelete: (taskId: string) => void;
+    onDelete: (taskId: TaskInterface) => void;
 }
 
 const Task: FC<TaskProps> = ({ task, onDelete }) => {
@@ -36,7 +36,7 @@ const Task: FC<TaskProps> = ({ task, onDelete }) => {
                 <Typography variant="body2">{task.description}</Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={() => onDelete(task.id)}>
+                <Button size="small" onClick={() => onDelete(task)}>
                     Delete
                 </Button>
             </CardActions>
