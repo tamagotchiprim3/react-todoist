@@ -23,8 +23,8 @@ const Tasks: FC<TasksProps> = () => {
     };
 
     return (
-        <div className="tasks">
-            <TasksContextProvider search={search} sort={sort}>
+        <TasksContextProvider search={search} sort={sort}>
+            <div className="tasks">
                 <TasksSearch
                     search={search}
                     sort={sort}
@@ -33,8 +33,8 @@ const Tasks: FC<TasksProps> = () => {
                 />
                 <TasksList />
                 <TaskFooter />
-            </TasksContextProvider>
-        </div>
+            </div>
+        </TasksContextProvider>
     );
 };
 

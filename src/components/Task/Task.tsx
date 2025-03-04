@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, RefObject } from 'react';
 import { TaskInterface } from '../../types/task-interface';
 import {
     Button,
@@ -8,15 +8,25 @@ import {
     Typography,
 } from '@mui/material';
 import './Task.scss';
+import { checkExpiration } from '../../utils/check-expiration';
 
 interface TaskProps {
     task: TaskInterface;
     onDelete: (taskId: TaskInterface) => void;
+    ref: RefObject<HTMLDivElement | null> | null;
 }
 
-const Task: FC<TaskProps> = ({ task, onDelete }) => {
+const Task: FC<TaskProps> = ({ task, onDelete, ref }) => {
     return (
-        <Card className="card" sx={{ background: '#4dabf5' }}>
+        <Card
+            ref={ref}
+            className="card"
+            sx={{
+                background: checkExpiration(task.expirationDate)
+                    ? '#4dabf5'
+                    : '#e57373',
+            }}
+        >
             <CardContent>
                 <Typography
                     gutterBottom
@@ -43,5 +53,4 @@ const Task: FC<TaskProps> = ({ task, onDelete }) => {
         </Card>
     );
 };
-
 export default Task;

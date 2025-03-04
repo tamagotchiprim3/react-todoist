@@ -1,7 +1,23 @@
-import React, { FC } from 'react';
-import { Input, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, {
+    ActionDispatch,
+    FC,
+    useContext,
+    useEffect,
+    useRef,
+} from 'react';
+import {
+    Button,
+    Input,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+} from '@mui/material';
 import './TasksSearch.scss';
 import { SortTypes } from '../../types/sort';
+import {
+    TaskAction,
+    TasksDispatchContext,
+} from '../../contexts/task-context';
 
 interface TasksSearchProps {
     search: string;
@@ -16,13 +32,31 @@ const TasksSearch: FC<TasksSearchProps> = ({
     search,
     onSearchChange,
 }) => {
+    const searchRef = useRef<HTMLInputElement>(null);
+    const dispatchTasks: ActionDispatch<[action: TaskAction]> = useContext(
+        TasksDispatchContext,
+    )!;
+
+    useEffect(() => {
+        if (searchRef.current) {
+            searchRef.current.focus();
+        }
+    }, [sort]);
+
     const handleSortChange = (event: SelectChangeEvent<SortTypes>) => {
         onSortChange(event.target.value as SortTypes);
     };
 
-    // Обработчик для Input
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
         onSearchChange(event.target.value);
+    };
+
+    const handleClearTasks = () => {
+        dispatchTasks({
+            type: 'clearExpired',
+        });
     };
 
     return (
@@ -32,6 +66,7 @@ const TasksSearch: FC<TasksSearchProps> = ({
                 onChange={handleSearchChange}
                 className="search__input"
                 placeholder="Search task"
+                inputRef={searchRef}
             />
             <Select
                 labelId="demo-simple-select-label"
@@ -53,6 +88,9 @@ const TasksSearch: FC<TasksSearchProps> = ({
                     Priority (DESC)
                 </MenuItem>
             </Select>
+            <Button onClick={handleClearTasks} variant="outlined">
+                Clear expired tasks
+            </Button>
         </div>
     );
 };

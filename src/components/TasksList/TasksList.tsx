@@ -1,4 +1,10 @@
-import React, { ActionDispatch, FC, useContext, useState } from 'react';
+import React, {
+    ActionDispatch,
+    FC,
+    useContext,
+    useRef,
+    useState,
+} from 'react';
 import { TaskInterface } from '../../types/task-interface';
 import Task from '../Task/Task';
 import './TasksList.scss';
@@ -11,10 +17,13 @@ import {
 } from '../../contexts/task-context';
 
 const TasksList: FC = () => {
-    const [openCreationForm, setOpenCreationForm] = useState<boolean>(false);
+    const [openCreationForm, setOpenCreationForm] =
+        useState<boolean>(false);
     const tasks: TaskInterface[] = useContext(TasksContext) || [];
-    const dispatchTasks: ActionDispatch<[action: TaskAction]> =
-        useContext(TasksDispatchContext)!;
+    const dispatchTasks: ActionDispatch<[action: TaskAction]> = useContext(
+        TasksDispatchContext,
+    )!;
+    const lastTaskRef = useRef<HTMLDivElement>(null);
 
     const handleCreationFormToggle = () => {
         setOpenCreationForm(!openCreationForm);
@@ -32,6 +41,7 @@ const TasksList: FC = () => {
             type: 'create',
             message: newTask,
         });
+        lastTaskRef.current?.scrollIntoView();
     };
 
     function handleTaskDelete(task: TaskInterface) {
@@ -45,13 +55,6 @@ const TasksList: FC = () => {
         <>
             {tasks.length > 0 && (
                 <div className="tasks-wrapper">
-                    {tasks.map((task: TaskInterface) => (
-                        <Task
-                            key={task.id}
-                            task={task}
-                            onDelete={handleTaskDelete}
-                        ></Task>
-                    ))}
                     <Card
                         className="creation-card"
                         sx={{ background: '#2196f3' }}
@@ -59,6 +62,18 @@ const TasksList: FC = () => {
                     >
                         Create
                     </Card>
+                    {tasks.map((task: TaskInterface, index: number) => (
+                        <Task
+                            key={task.id}
+                            task={task}
+                            onDelete={handleTaskDelete}
+                            ref={
+                                tasks.length - 1 === index
+                                    ? lastTaskRef
+                                    : null
+                            }
+                        ></Task>
+                    ))}
                     {openCreationForm && (
                         <TaskForm
                             open={openCreationForm}

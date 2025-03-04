@@ -13,7 +13,8 @@ export const sortTasks = (
         );
     } else if (sortType === SortTypes.ExpDateASC) {
         return sortedTasks.sort(
-            (a, b) => a.expirationDate.getTime() - b.expirationDate.getTime(),
+            (a, b) =>
+                a.expirationDate.getTime() - b.expirationDate.getTime(),
         );
     } else if (sortType === SortTypes.PriorityASC) {
         return sortedTasks.sort((a, b) => {

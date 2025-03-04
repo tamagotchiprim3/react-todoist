@@ -43,6 +43,7 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
             [name as string]: value,
         }));
     };
+
     const handleSelectChange = (e: SelectChangeEvent<TaskPriority>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -77,6 +78,7 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                 component: 'form',
                 onSubmit: handleSubmit,
             }}
+            key={open ? 'open' : 'closed'}
         >
             <DialogTitle>Task Creation</DialogTitle>
             <DialogContent>
@@ -90,12 +92,7 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     fullWidth
                     margin="dense"
                     variant="standard"
-                    error={!formData.title || formData.title.trim().length < 3}
-                    helperText={
-                        !formData.title || formData.title.trim().length < 3
-                            ? 'Title must be at least 3 characters long'
-                            : ''
-                    }
+                    autoFocus={true}
                 />
                 <TextField
                     required
@@ -143,7 +140,6 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
                     required
                     id="expirationDate"
                     name="expirationDate"
-                    label="Expiration Date"
                     type="datetime-local"
                     value={formData.expirationDate}
                     onChange={handleChange}

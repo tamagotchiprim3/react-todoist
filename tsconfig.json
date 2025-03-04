@@ -1,12 +1,12 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "module": "esnext",
-    "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
-  },
-  "include": ["src"]
+    "compilerOptions": {
+        "strict": true,
+        "module": "esnext",
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "Node"
+    },
+    "include": ["src"]
 }

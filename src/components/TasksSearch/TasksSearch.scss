@@ -5,8 +5,9 @@
   align-items: center;
   box-sizing: border-box;
   gap: 1rem;
+  border-bottom: 1px solid black;
 
   &__input {
-    flex: 1 1 auto
+    flex: 1 1 auto;
   }
 }
