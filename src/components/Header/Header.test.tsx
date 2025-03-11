@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Tasks from '../Tasks/Tasks';
+import Tasks from '../../pages/Tasks/Tasks';
 
 it('It should mount', () => {
     const div = document.createElement('div');
