@@ -1,4 +1,4 @@
-import { TaskInterface } from '../types/task-interface';
+import { TaskInterface } from '../shared/types/task-interface';
 import {
     ActionDispatch,
     createContext,
@@ -6,11 +6,11 @@ import {
     useMemo,
     useReducer,
 } from 'react';
-import { SortTypes } from '../types/sort';
-import { filterTasks } from '../utils/filter';
-import { sortTasks } from '../utils/sort';
-import TASKS_MOCK from '../utils/tasks.mock';
-import { checkExpiration } from '../utils/check-expiration';
+import { SortTypes } from '../shared/types/sort';
+import { checkExpiration } from '../shared/utils/check-expiration';
+import TASKS_MOCK from '../shared/utils/tasks.mock';
+import { filterTasks } from '../shared/utils/filter';
+import { sortTasks } from '../shared/utils/sort';
 
 export interface TaskAction {
     type: 'create' | 'delete' | 'clearExpired';

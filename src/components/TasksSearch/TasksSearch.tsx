@@ -13,11 +13,12 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import './TasksSearch.scss';
-import { SortTypes } from '../../types/sort';
+import { SortTypes } from '../../shared/types/sort';
 import {
     TaskAction,
     TasksDispatchContext,
 } from '../../contexts/task-context';
+import { Link } from 'react-router';
 
 interface TasksSearchProps {
     search: string;
@@ -91,6 +92,9 @@ const TasksSearch: FC<TasksSearchProps> = ({
             <Button onClick={handleClearTasks} variant="outlined">
                 Clear expired tasks
             </Button>
+            <Link to="/history">
+                <Button>Nav to History</Button>
+            </Link>
         </div>
     );
 };

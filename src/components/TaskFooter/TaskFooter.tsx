@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import './TaskFooter.scss';
-import { TaskInterface } from '../../types/task-interface';
+import { TaskInterface } from '../../shared/types/task-interface';
 import { TasksContext } from '../../contexts/task-context';
 
 const TaskFooter: FC = () => {

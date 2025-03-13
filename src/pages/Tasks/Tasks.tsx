@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import './Tasks.scss';
 import TasksContextProvider from '../../contexts/task-context';
 import TasksSearch from '../../components/TasksSearch/TasksSearch';
-import { SortTypes } from '../../types/sort';
+import { SortTypes } from '../../shared/types/sort';
 import TasksList from '../../components/TasksList/TasksList';
 import TaskFooter from '../../components/TaskFooter/TaskFooter';
 

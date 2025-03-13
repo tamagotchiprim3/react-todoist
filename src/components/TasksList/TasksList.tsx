@@ -5,7 +5,7 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { TaskInterface } from '../../types/task-interface';
+import { TaskInterface } from '../../shared/types/task-interface';
 import Task from '../Task/Task';
 import './TasksList.scss';
 import { Card } from '@mui/material';

@@ -1,5 +1,5 @@
 import React, { FC, RefObject } from 'react';
-import { TaskInterface } from '../../types/task-interface';
+import { TaskInterface } from '../../shared/types/task-interface';
 import {
     Button,
     Card,
@@ -7,8 +7,7 @@ import {
     CardContent,
     Typography,
 } from '@mui/material';
-import './Task.scss';
-import { checkExpiration } from '../../utils/check-expiration';
+import { checkExpiration } from '../../shared/utils/check-expiration';
 
 interface TaskProps {
     task: TaskInterface;

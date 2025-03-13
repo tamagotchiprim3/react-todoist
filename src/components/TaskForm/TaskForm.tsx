@@ -16,7 +16,8 @@ import {
     ITaskForm,
     TaskInterface,
     TaskPriority,
-} from '../../types/task-interface';
+} from '../../shared/types/task-interface';
+import { useNavigate } from 'react-router';
 
 interface TaskFormProps {
     open: boolean;
@@ -25,6 +26,7 @@ interface TaskFormProps {
 }
 
 const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<ITaskForm>({
         title: '',
         description: '',
@@ -62,6 +64,7 @@ const TaskForm: FC<TaskFormProps> = ({ open, onClose, onSubmit }) => {
         };
         onSubmit(task);
         onClose();
+        navigate('/history');
         setFormData({
             title: '',
             description: '',
