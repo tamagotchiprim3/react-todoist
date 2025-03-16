@@ -5,6 +5,7 @@ import TasksSearch from '../../components/TasksSearch/TasksSearch';
 import { SortTypes } from '../../shared/types/sort';
 import TasksList from '../../components/TasksList/TasksList';
 import TaskFooter from '../../components/TaskFooter/TaskFooter';
+import Counter from '../../features/counter/Counter';
 
 interface TasksProps {}
 
@@ -25,6 +26,7 @@ const Tasks: FC<TasksProps> = () => {
     return (
         <TasksContextProvider search={search} sort={sort}>
             <div className="tasks">
+                <Counter></Counter>
                 <TasksSearch
                     search={search}
                     sort={sort}

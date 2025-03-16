@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router';
-import Layout from '../components/Layout/Layout';
-import Tasks from '../pages/Tasks/Tasks';
 import { historyRoutes } from './history.routes';
-import History from '../pages/History/History';
 
-// Определяем маршруты с использованием RouteObject
+const Layout = lazy(() => import('../components/Layout/Layout'));
+const Tasks = lazy(() => import('../pages/Tasks/Tasks'));
+const History = lazy(() => import('../pages/History/History'));
+
 export const routes: RouteObject[] = [
     {
         path: '/',
@@ -24,6 +24,6 @@ export const routes: RouteObject[] = [
     },
     {
         path: '*',
-        element: <Navigate to="/tasks"></Navigate>,
+        element: <Navigate to="/tasks" />,
     },
 ];
